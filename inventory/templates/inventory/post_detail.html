@@ -1,0 +1,19 @@
+{% extends 'base.html' %}
+
+{% block title %}{{ post.title }}{% endblock %}
+
+{% block content %}
+<a href="{% url 'post_list' %}" class="btn-back">← Назад до списку публікацій</a>
+<a href="{% url 'home' %}" class="btn-back" style="background-color: #7f8c8d;">Головна</a>
+
+<h1>{{ post.title }}</h1>
+<p><strong>Категорія:</strong> {{ post.category.name }} | <strong>Опубліковано:</strong> {{ post.created_at|date:"d.m.Y H:i" }}</p>
+
+{% if post.image %}
+    <img src="{{ post.image.url }}" class="post-img" alt="{{ post.title }}">
+{% endif %}
+
+<div style="margin-top: 20px;">
+    <p>{{ post.content }}</p>
+</div>
+{% endblock %}

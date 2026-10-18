@@ -1,0 +1,21 @@
+{% extends 'base.html' %}
+
+{% block title %}Список публікацій{% endblock %}
+
+{% block content %}
+<a href="{% url 'home' %}" class="btn-back">← На головну</a>
+<h1>Всі публікації блогу</h1>
+
+{% for post in posts %}
+    <div class="card">
+        <h2><a href="{% url 'post_detail' post.pk %}">{{ post.title }}</a></h2>
+        <p><strong>Категорія:</strong> {{ post.category.name }} | <strong>Дата:</strong> {{ post.created_at|date:"d.m.Y H:i" }}</p>
+        <p>{{ post.content|truncatewords:20 }}</p>
+        {% if post.image %}
+            <img src="{{ post.image.url }}" class="post-img" alt="{{ post.title }}" style="max-height: 150px;">
+        {% endif %}
+    </div>
+{% empty %}
+    <p>Публікацій поки немає.</p>
+{% endfor %}
+{% endblock %}
