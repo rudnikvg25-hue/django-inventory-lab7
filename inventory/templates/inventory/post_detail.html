@@ -3,17 +3,24 @@
 {% block title %}{{ post.title }}{% endblock %}
 
 {% block content %}
-<a href="{% url 'post_list' %}" class="btn-back">← Назад до списку публікацій</a>
-<a href="{% url 'home' %}" class="btn-back" style="background-color: #7f8c8d;">Головна</a>
+<div style="margin-bottom: 20px;">
+    <a href="{% url 'post_list' %}" class="btn">← Назад до списку</a>
+    <a href="{% url 'home' %}" class="btn btn-secondary">Головна</a>
+</div>
 
-<h1>{{ post.title }}</h1>
-<p><strong>Категорія:</strong> {{ post.category.name }} | <strong>Опубліковано:</strong> {{ post.created_at|date:"d.m.Y H:i" }}</p>
+<h1 style="color: #1e3c72; font-size: 32px; margin-bottom: 10px;">{{ post.title }}</h1>
+
+<div class="post-meta">
+    🏷️ <strong>Категорія:</strong> {{ post.category.name }} | 📅 <strong>Опубліковано:</strong> {{ post.created_at|date:"d.m.Y H:i" }}
+</div>
+
+<hr style="border: 0; border-top: 1px solid #e1e8ed; margin: 20px 0;">
 
 {% if post.image %}
     <img src="{{ post.image.url }}" class="post-img" alt="{{ post.title }}">
 {% endif %}
 
-<div style="margin-top: 20px;">
+<div style="font-size: 18px; line-height: 1.8; margin-top: 20px;">
     <p>{{ post.content }}</p>
 </div>
 {% endblock %}
